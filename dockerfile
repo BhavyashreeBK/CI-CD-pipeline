@@ -1,10 +1,8 @@
-FROM node:20-alpine AS build
+FROM node:20 AS build
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm config set strict-ssl false
-RUN npm ci
+RUN npm install
 
 COPY . .
 RUN npm run build
