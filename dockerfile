@@ -4,7 +4,6 @@ WORKDIR /app
 COPY package*.json ./
 
 RUN npm config set strict-ssl false
-RUN npm install -g npm@latest
 RUN npm ci
 
 COPY . .
