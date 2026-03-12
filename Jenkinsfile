@@ -1,20 +1,23 @@
 pipeline {
     agent any
 
-    stages{
-        stage('build docker image'){
-            steps{
+    stages {
+
+        stage('Build Docker Image') {
+            steps {
                 bat 'docker build --no-cache -t vite-app .'
-                 }
             }
-    stage('deploy container'){
-        steps{
-            bat '''
-            docker stop vite-container ||echo container not running
-            docker rm vite-container || echo container not found
-            docker run -d -p 8081:80 --name vite-container vite-app
-            '''
-             }
         }
+
+        stage('Deploy Container') {
+            steps {
+                bat '''
+                docker stop vite-container || echo container not running
+                docker rm vite-container || echo container not found
+                docker run -d -p 8081:80 --name vite-container vite-app
+                '''
+            }
+        }
+
     }
 }
